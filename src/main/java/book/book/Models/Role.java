@@ -1,10 +1,13 @@
 package book.book.Models;
 
 import jakarta.persistence.*;
+import lombok.Data;
 import org.springframework.data.annotation.Id;
 
 import java.io.Serializable;
+import java.util.Collection;
 
+@Data
 @Entity
 @Table(name = "roles")
 public class Role implements Serializable {
@@ -16,18 +19,6 @@ public class Role implements Serializable {
 
     @Column(nullable = false, unique = true)
     private String name;
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return this.name = name;
-    }
 
     // Constructors, getters, and setters
 }

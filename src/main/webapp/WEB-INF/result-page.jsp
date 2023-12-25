@@ -1,6 +1,6 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<jsp:useBean id="nameInfo" scope="request" type="book.book.DTO.NameinfDTO" xmlns:jsp="http://java.sun.com/JSP/Page"/>
+<jsp:useBean id="nameInfo" scope="request" type="book.book.DTO.PersonDTO" xmlns:jsp="http://java.sun.com/JSP/Page"/>
 
 <!DOCTYPE html>
 <html lang="en">

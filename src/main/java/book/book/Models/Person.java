@@ -22,7 +22,9 @@ public class Person implements Serializable {
     private Long id;
     private String username;
     private String password;
-
+    private String email;
+    @ManyToMany
+    private Collection<Role> roles;
     public Person() {
 
     }
