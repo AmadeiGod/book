@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update-book</title>
+</head>
+<body>
+<form action="#"
+      th:action="@{/update/{id}(id=${book.id})}"
+      th:object="${book}"
+      method="post">
+  <label for="name">Name</label>
+  <input type="text" th:field="*{name}" id="name" placeholder="Name">
+  <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+  <label for="email">Email</label>
+  <input type="text" th:field="*{text}" id="email" placeholder="Text">
+  <span th:if="${#fields.hasErrors('email')}" th:errors="*{text}"></span>
+  <input type="submit" value="Update book">
+</form>
+</body>
+</html>

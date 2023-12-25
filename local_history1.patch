@@ -1,0 +1,14 @@
+Index: src/main/java/book/book/Controllers/RestController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/book/book/Controllers/RestController.java b/src/main/java/book/book/Controllers/RestController.java
+--- a/src/main/java/book/book/Controllers/RestController.java	
++++ b/src/main/java/book/book/Controllers/RestController.java	(date 1699037879639)
+@@ -1,2 +1,4 @@
+-package book.book.Controllers;public class RestController {
++package book.book.Controllers;
++
++public class RestController {
+ }
