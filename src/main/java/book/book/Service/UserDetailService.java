@@ -1,9 +1,11 @@
-/*package book.book.Service;
+package book.book.Service;
 
-import book.book.Models.Person;
-import book.book.Repo.Repository;
+
+import book.book.Models.User;
+import book.book.Repo.UserRepository;
+import jakarta.transaction.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -11,18 +13,15 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserDetailService implements UserDetailsService {
-    private final Repository dao;
+    @Autowired
+    UserRepository userRepository;
 
-    public UserDetailService(Repository dao) {
-        this.dao = dao;
-    }
     @Override
+    @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + username));
 
-        User user = dao.findByUsername(username);
-        if (user == null) {
-            throw new UsernameNotFoundException("User not found");
-        }
-        return new UserDetailsImpl(user);
+        return UserDetailsImpl.build(user);
     }
-}*/
+}

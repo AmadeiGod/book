@@ -33,21 +33,7 @@ public class Configuration implements WebMvcConfigurer {
 
         return bean;
     }
-    /*
-    @Bean
-    SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
 
-        httpSecurity.formLogin(Customizer.withDefaults());
-        httpSecurity.csrf().disable();
-        httpSecurity.headers().frameOptions().disable();
-        httpSecurity
-                .authorizeHttpRequests()
-                .requestMatchers("/").hasAuthority("ADMIN")
-                .requestMatchers("/h2-console/**").permitAll()
-                .anyRequest().authenticated();
-        return httpSecurity.build();
-    }
-*/
 
 
 }
