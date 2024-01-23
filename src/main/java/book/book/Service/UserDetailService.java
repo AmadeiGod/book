@@ -1,9 +1,7 @@
-/*package book.book.Service;
-
-import book.book.Models.Person;
-import book.book.Repo.Repository;
-import org.springframework.context.annotation.Bean;
-import org.springframework.security.core.userdetails.User;
+package book.book.Service;
+/*
+import book.book.Models.User;
+import book.book.Repo.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -11,9 +9,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserDetailService implements UserDetailsService {
-    private final Repository dao;
+    private final UserRepository dao;
 
-    public UserDetailService(Repository dao) {
+    public UserDetailService(UserRepository dao) {
         this.dao = dao;
     }
     @Override
@@ -25,4 +23,5 @@ public class UserDetailService implements UserDetailsService {
         }
         return new UserDetailsImpl(user);
     }
-}*/
+}
+*/
