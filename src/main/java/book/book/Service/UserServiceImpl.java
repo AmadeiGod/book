@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService {
                 registrationDto.getEmail(),
                 passwordEncoder.encode(registrationDto
                         .getPassword()),
-                List.of(new Role("1")));
+                List.of(new Role("ROLE_ADMIN")));
 
         return userRepository.save(user);
     }
@@ -51,9 +51,7 @@ public class UserServiceImpl implements UserService {
             throw new UsernameNotFoundException
                     ("Invalid username or password.");
         }
-        return new org.springframework.security
-                .core.userdetails.User(user.getUsername(),
-                user.getPassword(),
+        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
                 mapRolesToAuthorities(user.getRoles()));
     }
 
