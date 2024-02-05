@@ -2,6 +2,7 @@ package book.book.Config;
 
 
 import book.book.Service.UserService;
+import book.book.Service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,16 +24,22 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import javax.sql.DataSource;
+
 import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig{
+public class SecurityConfig {
+    private UserServiceImpl userDetailsService;
+    @Autowired
+    private DataSource dataSource;
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
 
         return new BCryptPasswordEncoder();
     }
+
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
         return configuration.getAuthenticationManager();
@@ -42,7 +49,7 @@ public class SecurityConfig{
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/index","/registation").permitAll()
+                        .requestMatchers("/index", "/registration").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form
@@ -55,5 +62,13 @@ public class SecurityConfig{
                         .invalidateHttpSession(true));
 
         return http.build();
+    }
+
+
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.jdbcAuthentication().dataSource(dataSource).withDefaultSchema()
+                .withUser(User.withUsername("user").password("password").roles("USER"))
+                .withUser(User.withUsername("admin").password("password").roles("ADMIN"));
+
     }
 }

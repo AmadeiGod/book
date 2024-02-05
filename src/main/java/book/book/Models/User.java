@@ -24,7 +24,6 @@ public class User implements Serializable {
     private String password;
     private String email;
     @ManyToMany(cascade=CascadeType.ALL)
-    @LazyCollection(LazyCollectionOption.FALSE)
     private Collection<Role> roles;
     public User() {
 

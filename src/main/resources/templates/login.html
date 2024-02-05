@@ -10,8 +10,9 @@
     Unable to login. Check your username and password.
 </div>
 <p>New here? Click
-    <a href= "/" th:href="@{/registration.html}">here</a> to register.</p>
-<form method="POST" th:action="@{/login}" id="loginForm">
+    <a href= "/registration.html" th:href="@{/registration}">here</a> to register.</p>
+
+<form method="POST" th:action="@{/login}"  th:object="${user}" id="loginForm">
     <label for="name">Username: </label>
     <input type="text" name="name" id="name" /><br/>
     <label for="password">Password: </label>

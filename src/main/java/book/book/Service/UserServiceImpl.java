@@ -12,15 +12,18 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
-
+@Service
 public class UserServiceImpl implements UserService {
+    @Autowired
     private UserRepository userRepository;
+    @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
     public UserServiceImpl(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder) {
@@ -32,12 +35,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public User save(RegDto registrationDto) {
 
-        var user = new User(
-                registrationDto.getUsername(),
-                registrationDto.getEmail(),
-                passwordEncoder.encode(registrationDto
-                        .getPassword()),
-                List.of(new Role("ROLE_ADMIN")));
+        User user = new User();
+                user.setUsername(registrationDto.getUsername());
+                user.setEmail(registrationDto.getEmail());
+                user.setPassword(passwordEncoder.encode(registrationDto.getPassword()));
+
 
         return userRepository.save(user);
     }
@@ -46,7 +48,7 @@ public class UserServiceImpl implements UserService {
     public UserDetails loadUserByUsername(String username)
             throws UsernameNotFoundException {
 
-        var user = userRepository.findByEmail(username);
+        User user = userRepository.findByEmail(username);
         if (user == null) {
             throw new UsernameNotFoundException
                     ("Invalid username or password.");

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,28 +16,35 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping()
 public class RegistrationController {
-
+    @Autowired
     private UserRepository userRepository;
-    private UserService userService;
-    @GetMapping("/registration")
-    public String registration() {
-        return "registration";
+    private final UserService userService;
+
+    public RegistrationController(UserService userService) {
+        this.userService = userService;
     }
 
+    @GetMapping("/registration")
+    public String registration(Model model) {
+            RegDto regDto = new RegDto();
+            model.addAttribute("user", regDto);
+            return "registration";}
     @ModelAttribute("user")
     public RegDto userRegistrationDto() {
         return new RegDto();
     }
 
     @PostMapping("registration")
-    public String registerUserAccount(@ModelAttribute("user")  RegDto registrationDto) {
+    public String registerUserAccount(RegDto registrationDto) {
 
         if(userRepository.existsByUsername(registrationDto.getUsername())){
-            return String.valueOf(new ResponseEntity<>("Username is already exist!", HttpStatus.BAD_REQUEST));
+            System.out.println("Такой логин уже есть");
+            return "login";
         }
 
         if(userRepository.existsByEmail(registrationDto.getEmail())){
-            return String.valueOf(new ResponseEntity<>("Email is already exist!", HttpStatus.BAD_REQUEST));
+            System.out.println("Такой email уже есть");
+            return "login";
         }
 
         try {
@@ -47,8 +55,8 @@ public class RegistrationController {
             System.out.println("Ошибка регистрации");
             return "redirect:/registration?email_invalid";
         }
-
-        return String.valueOf(new ResponseEntity<>("User is registered successfully!", HttpStatus.OK));
+        System.out.println("User is registered successfully!");
+        return "login";
     }
 
 }

@@ -31,5 +31,32 @@
   </div>
   <p><a href="/signup">Add a new book</a></p>
 </div>
+
+<div th:switch="${books}">
+  <h2 th:case="null">No users yet!</h2>
+  <div th:case="*">
+    <h2>Users</h2>
+    <table>
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="book : ${books}">
+        <td th:text="${book.name}"></td>
+        <td th:text="${book.text}"></td>
+        <td th:text="${book.autor}"></td>
+        <td><a th:href="@{/edit/{id}(id=${book.id})}">Edit</a></td>
+        <td><a th:href="@{/delete/{id}(id=${book.id})}">Delete</a></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <p><a href="/signup">Add a new book</a></p>
+</div>
 </body>
 </html>

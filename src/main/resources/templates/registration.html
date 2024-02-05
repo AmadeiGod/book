@@ -6,15 +6,15 @@
 </head>
 <body>
 <h1>Register</h1>
-<form method="POST" th:action="@{/registration}" id="registerForm">
+<form method="POST" action="#" th:action="@{/registration}"  th:object="${user}" id="registerForm">
     <label >Username: </label>
-    <input type="text" name="username"/><br/>
+    <input type="text" th:field="*{username}" id="username"/><br/>
 
     <label >Password: </label>
-    <input type="password" name="password"/><br/>
+    <input type="password" th:field="*{password}" id="password"/><br/>
 
-    <label >City: </label>
-    <input type="text" name="city"/><br/>
+    <label >Email: </label>
+    <input type="text" th:field="*{email}" id="email"/><br/>
 
     <input type="submit" value="Register"/>
 </form>
