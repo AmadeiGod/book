@@ -39,12 +39,12 @@ public class RegistrationController {
 
         if(userRepository.existsByUsername(registrationDto.getUsername())){
             System.out.println("Такой логин уже есть");
-            return "login";
+            return "registration";
         }
 
         if(userRepository.existsByEmail(registrationDto.getEmail())){
             System.out.println("Такой email уже есть");
-            return "login";
+            return "registration";
         }
 
         try {

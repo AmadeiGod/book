@@ -49,7 +49,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/index", "/registration").permitAll()
+                        .requestMatchers("/index", "/registration", "login").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form
@@ -66,9 +66,7 @@ public class SecurityConfig {
 
 
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.jdbcAuthentication().dataSource(dataSource).withDefaultSchema()
-                .withUser(User.withUsername("user").password("password").roles("USER"))
-                .withUser(User.withUsername("admin").password("password").roles("ADMIN"));
+        auth.jdbcAuthentication().dataSource(dataSource);
 
     }
 }
