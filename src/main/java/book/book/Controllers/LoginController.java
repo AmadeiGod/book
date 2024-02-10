@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping()
 public class LoginController {
 
-    @Autowired
+
     private AuthenticationManager authenticationManager;
     @PostMapping("/login")
     public String authenticateUser( LoginDto loginDto) {

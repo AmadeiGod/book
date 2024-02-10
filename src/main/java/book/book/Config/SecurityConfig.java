@@ -65,8 +65,14 @@ public class SecurityConfig {
     }
 
 
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.jdbcAuthentication().dataSource(dataSource);
 
+    public void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.jdbcAuthentication()
+                .dataSource(dataSource)
+                .usersByUsernameQuery(
+                        "select username, password" + "from users" + "where username=?")
+                .authoritiesByUsernameQuery(
+                        "select login, authority from my_user " +
+                                "where login=?");
     }
 }
