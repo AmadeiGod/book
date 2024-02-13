@@ -22,12 +22,8 @@ public class LoginController {
     private AuthenticationManager authenticationManager;
     @PostMapping("/login")
     public String authenticateUser( LoginDto loginDto) {
-
-
-
         Authentication authentication = authenticationManager
                 .authenticate(new UsernamePasswordAuthenticationToken(loginDto.getUsername(), loginDto.getPassword()));
-        System.out.println("1");
         SecurityContextHolder.getContext().setAuthentication(authentication);
         /*
         Authentication authentication2 = SecurityContextHolder.getContext().getAuthentication();

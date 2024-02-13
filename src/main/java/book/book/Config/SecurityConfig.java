@@ -1,6 +1,7 @@
 package book.book.Config;
 
 
+import book.book.Service.UserDetailService;
 import book.book.Service.UserService;
 import book.book.Service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,14 +66,21 @@ public class SecurityConfig {
     }
 
 
-
-    public void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.jdbcAuthentication()
-                .dataSource(dataSource)
-                .usersByUsernameQuery(
-                        "select username, password" + "from users" + "where username=?")
-                .authoritiesByUsernameQuery(
-                        "select login, authority from my_user " +
-                                "where login=?");
+    @Bean
+    public UserDetailsService userDetailsService() {
+        return new UserServiceImpl();
     }
+    @Bean
+    public DaoAuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+        authProvider.setUserDetailsService(userDetailsService());
+        authProvider.setPasswordEncoder(passwordEncoder());
+
+        return authProvider;
+    }
+
+
+
+
+
 }

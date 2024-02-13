@@ -15,26 +15,13 @@ import java.util.Collection;
 @Data
 @Entity
 public class User implements Serializable {
-    @Serial
-    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String username;
     private String password;
     private String email;
-    @ManyToMany(cascade=CascadeType.ALL)
-    private Collection<Role> roles;
-    public User() {
+    private String role;
 
-    }
-    public User(String username,
-                String email, String password,
-                Collection<Role> roles) {
-
-        this.username = username;
-        this.email = email;
-        this.password = password;
-        this.roles = roles;
-    }
 }
