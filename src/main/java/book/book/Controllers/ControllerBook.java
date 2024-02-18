@@ -13,13 +13,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.validation.Valid;
 
 @Controller
-public class Controller1 {
+public class ControllerBook {
     @Autowired
     private BookRepository bookRepository;
-    @GetMapping("/login")
-    public String login() {
-        return "login";
-    }
+
 
     @GetMapping("/admin")
     public String admin() {

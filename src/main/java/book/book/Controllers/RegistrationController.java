@@ -4,8 +4,6 @@ import book.book.DTO.RegDto;
 import book.book.Repo.UserRepository;
 import book.book.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -55,8 +53,8 @@ public class RegistrationController {
             System.out.println("Ошибка регистрации");
             return "redirect:/registration?email_invalid";
         }
-        System.out.println("User is registered successfully!");
-        return "login";
+        System.out.println("Пользователь зарегистрирован    ");
+        return "/auth/login";
     }
 
 }

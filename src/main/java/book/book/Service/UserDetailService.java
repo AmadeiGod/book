@@ -27,9 +27,12 @@ public class UserDetailService implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         SimpleGrantedAuthority authority = new SimpleGrantedAuthority(user.getRole());
-        return List.of(authority);
+        return Arrays.asList(authority);
     }
 
+    private String getEmail(){
+        return user.getEmail();
+    }
     @Override
     public String getPassword() {
         return user.getPassword();
