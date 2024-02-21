@@ -6,6 +6,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import java.util.List;
 
 public interface UserService extends UserDetailsService{
+    User findByUsername(String username);
+
+    User findUserByUsername(String username);
+
     List<User> getAll();
 
     User save(RegDto userRegDto);

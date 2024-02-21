@@ -24,6 +24,7 @@ public class UserDetailService implements UserDetails {
 
     }
 
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         SimpleGrantedAuthority authority = new SimpleGrantedAuthority(user.getRole());

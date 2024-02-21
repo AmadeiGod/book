@@ -7,6 +7,8 @@ import org.springframework.data.repository.CrudRepository;
 public interface UserRepository extends CrudRepository<User, Long> {
 
     User findByUsername(String username);
+    User findUserByUsername(String username);
+    User findByUsernameOrderByEmail(String username);
     User findByUsernameOrEmail(String username, String email);
     User findByEmail(String email);
     public User getUserByUsername(String username);
