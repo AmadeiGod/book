@@ -35,4 +35,5 @@ public class ControllerUser {
         model.addAttribute("Role", user.getRole());
         return "user/personalpage";
     }
+
 }

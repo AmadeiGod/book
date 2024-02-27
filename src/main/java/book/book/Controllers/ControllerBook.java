@@ -2,6 +2,7 @@ package book.book.Controllers;
 
 import book.book.Models.Book;
 import book.book.Repo.BookRepository;
+import book.book.Service.BookServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,8 +10,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 public class ControllerBook {
@@ -71,5 +74,18 @@ public class ControllerBook {
                 .orElseThrow(() -> new IllegalArgumentException("Invalid book Id:" + id));
         bookRepository.delete(book);
         return "redirect:/index";
+    }
+    @Autowired
+    private BookServices service;
+    @RequestMapping(path = {"/","/search"})
+    public String home(Book book, Model model, String keyword) {
+        if(keyword!=null) {
+            List<Book> list = bookRepository.findByKeyword(keyword);
+            model.addAttribute("list", list);
+            System.out.println(list);
+        }else {
+            List<Book> list = service.getAllShops();
+            model.addAttribute("list", list);}
+        return "index";
     }
 }
