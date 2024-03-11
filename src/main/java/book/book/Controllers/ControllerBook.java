@@ -72,6 +72,7 @@ public class ControllerBook {
     public String deleteBook(@PathVariable("id") long id, Model model) {
         Book book = bookRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid book Id:" + id));
+
         bookRepository.delete(book);
         return "redirect:/index";
     }

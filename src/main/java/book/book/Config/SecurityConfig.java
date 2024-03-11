@@ -61,6 +61,7 @@ public class SecurityConfig {
         http.authenticationProvider(authenticationProvider())
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/index", "/registration", "/auth/login").permitAll()
+                        .requestMatchers("/add-cart/{id}").hasRole("USER")
                         .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form

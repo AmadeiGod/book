@@ -5,6 +5,9 @@
     <title>Title</title>
 </head>
 <body>
+
+<a href="/cart">Корзина</a>
+
 <form th:action="@{/search}" method="get">
   <input type="text" name="keyword" th:value="${keyword}"  placeholder="Find by Owner Name & Shop Type" size="50" >
   <button type="submit" class="btn btn-info" >Search</button>
@@ -28,7 +31,8 @@
         <td th:text="${book.text}"></td>
         <td th:text="${book.autor}"></td>
         <td><a th:href="@{/edit/{id}(id=${book.id})}">Edit</a></td>
-        <td><a th:href="@{/delete/{id}(id=${book.id})}">Delete</a></td>
+        <td><a th:href="@{/delete/{id}(id=${book.id})}">Delete</a></td><br>
+        <td><a th:href="@{/add-cart/{id}(id=${book.id})}">Добавить в корзину</a></td>
       </tr>
       </tbody>
     </table>
