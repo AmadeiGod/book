@@ -76,6 +76,8 @@ public class ControllerBook {
         bookRepository.delete(book);
         return "redirect:/index";
     }
+
+
     @Autowired
     private BookServices service;
     @RequestMapping(path = {"/","/search"})

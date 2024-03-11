@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.Collections;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Stream;
@@ -31,7 +32,9 @@ public class ControllerCart {
     @Autowired
     private UserRepository userRepository;
     @GetMapping("/cart")
-    public String Cart(){
+    public String Cart(Model model,Authentication authentication){
+        User user = userService.findUserByUsername(authentication.getName());
+        model.addAttribute("carts",cartRepository.findAllById(Collections.singleton(user.getId())));
         return "cart";
     }
     @GetMapping("/add-cart/{id}")
