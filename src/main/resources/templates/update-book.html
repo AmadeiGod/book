@@ -11,10 +11,15 @@
       method="post">
   <label for="name">Name</label>
   <input type="text" th:field="*{name}" id="name" placeholder="Name">
-  <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+
   <label for="email">Email</label>
   <input type="text" th:field="*{text}" id="email" placeholder="Text">
-  <span th:if="${#fields.hasErrors('email')}" th:errors="*{text}"></span>
+
+    <label for="autor">Autor</label>
+    <input type="text" th:field="*{autor}" id="autor" placeholder="Autor">
+
+
+
   <input type="submit" value="Update book">
 </form>
 </body>

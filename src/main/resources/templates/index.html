@@ -7,6 +7,7 @@
 <body>
 
 <a href="/cart">Корзина</a>
+<a href="/index">Главная</a>
 
 <form th:action="@{/search}" method="get">
   <input type="text" name="keyword" th:value="${keyword}"  placeholder="Find by Owner Name & Shop Type" size="50" >
@@ -20,7 +21,8 @@
       <thead>
       <tr>
         <th>Name</th>
-        <th>Email</th>
+        <th>Text</th>
+        <th>Author</th>
         <th>Edit</th>
         <th>Delete</th>
       </tr>
