@@ -78,4 +78,24 @@ public class ControllerCart {
         System.out.println("32");
         return "redirect:/cart";
     }
+    @GetMapping("cart/edit-delete-countbook/{id}")
+    public String cart_edit_delete_countbook(@PathVariable("id") long id, Model model,Authentication authentication) {
+        User user = userService.findUserByUsername(authentication.getName());
+        Cart cart = cartRepository.findByUsernameIdAndIdBook(user.getId(),id).orElseThrow(() -> new IllegalArgumentException("Invalid book Id:" + id));
+        if(cart.getCountBook() < 2){
+            cartRepository.delete(cart);
+        }else{
+            cart.setCountBook(cart.getCountBook() - 1);
+            cartRepository.save(cart);
+        }
+        return "redirect:/cart";
+    }
+    @GetMapping("cart/edit-add-countbook/{id}")
+    public String cart_edit_add_countbook(@PathVariable("id") long id, Model model,Authentication authentication) {
+        User user = userService.findUserByUsername(authentication.getName());
+        Cart cart = cartRepository.findByUsernameIdAndIdBook(user.getId(),id).orElseThrow(() -> new IllegalArgumentException("Invalid book Id:" + id));
+        cart.setCountBook(cart.getCountBook() + 1);
+        cartRepository.save(cart);
+        return "redirect:/cart";
+    }
 }   

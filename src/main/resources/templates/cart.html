@@ -11,6 +11,8 @@
     <td th:text="${cart.value.text}"></td>
     <td th:text="${cart.value.autor}"></td>
     <td th:text="${cart.key.countBook}"></td>
+    <td><a th:href="@{cart/edit-delete-countbook/{id}(id=${cart.value.id})}">Уменьшить</a></td>
+    <td><a th:href="@{cart/edit-add-countbook/{id}(id=${cart.value.id})}">Увеличить</a></td>
     <td><a th:href="@{cart/delete/{id}(id=${cart.value.id})}">Delete</a></td><br>
 </tr>
 <a href="/buy">Купить</a>
