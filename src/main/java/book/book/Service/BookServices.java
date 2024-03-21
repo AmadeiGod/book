@@ -3,6 +3,8 @@ package book.book.Service;
 import book.book.Models.Book;
 import book.book.Repo.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,7 +19,7 @@ public class BookServices {
         return list;
     }
 
-    public List<Book> getByKeyword(String keyword){
-        return bookRepository.findByKeyword(keyword);
+    public List<Book> getByKeyword(String keyword,Pageable pageable){
+        return bookRepository.findByKeyword(keyword,pageable);
     }
 }

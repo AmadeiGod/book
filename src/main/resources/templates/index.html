@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -8,7 +8,7 @@
 
 <a href="/cart">Корзина</a>
 <a href="/index">Главная</a>
-
+<a  href="/manager">Manager</a>
 <form th:action="@{/search}" method="get">
   <input type="text" name="keyword" th:value="${keyword}"  placeholder="Find by Owner Name & Shop Type" size="50" >
   <button type="submit" class="btn btn-info" >Search</button>
@@ -16,7 +16,6 @@
 </form>
 <div th:switch="${books}">
   <div th:case="*">
-    <h2>Users</h2>
     <table>
       <thead>
       <tr>
@@ -33,21 +32,23 @@
         <td th:text="${book.text}"></td>
         <td th:text="${book.autor}"></td>
         <td><a th:href="@{/edit/{id}(id=${book.id})}">Edit</a></td>
-        <td><a th:href="@{/delete/{id}(id=${book.id})}">Delete</a></td><br>
+        <td><a th:href="@{/delete/{id}(id=${book.id})}">Delete</a></td>
         <td><a th:href="@{/add-cart/{id}(id=${book.id})}">Добавить в корзину</a></td>
       </tr>
       </tbody>
     </table>
   </div>
-  <p><a href="/signup">Add a new book</a></p>
+
 </div>
 
-<tr th:each="book : ${list}" th:else="${not #lists.isEmpty(list)}">
+<tr th:each="book : ${list}" >
   <td th:text="${book.name}"></td>
   <td th:text="${book.text}"></td>
   <td th:text="${book.autor}"></td>
   <td><a th:href="@{/edit/{id}(id=${book.id})}">Edit</a></td>
-  <td><a th:href="@{/delete/{id}(id=${book.id})}">Delete</a></td>
+  <td><a th:href="@{/delete/{id}(id=${book.id})}">Delete</a></td><br>
 </tr>
+
+<p><a href="/signup">Add a new book</a></p>
 </body>
 </html>
