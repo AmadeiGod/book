@@ -60,19 +60,20 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authenticationProvider(authenticationProvider())
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/index", "/registration", "/auth/login").permitAll()
-                        .requestMatchers("/add-cart/{id}").hasAnyAuthority("USER")
+                        .requestMatchers("/index", "/registration", "/auth/login","/home","/book/*").permitAll()
+                        .requestMatchers("/add-cart/{id}").hasAnyAuthority("USER","ADMIN")
                         .requestMatchers("/manager").hasAnyAuthority("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form
                         .loginPage("/auth/login")
                         .loginProcessingUrl("/process_login")
+                        .defaultSuccessUrl("/index")
                         .permitAll()
                 )
                 .logout((logout) -> logout
-                        .logoutUrl("/logout")
-                        .logoutSuccessUrl("/"));
+                        .logoutUrl("/user/logout")
+                        .logoutSuccessUrl("/index"));
 
         return http.build();
     }

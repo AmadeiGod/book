@@ -9,6 +9,8 @@
 <a href="/cart">Корзина</a>
 <a href="/index">Главная</a>
 <a  href="/manager">Manager</a>
+<a th:href="@{/user/personalpage}">Профиль</a>
+<a th:href="@{/user/logout}" sec:authorize="isAuthenticated()">Выйти</a>
 <form th:action="@{/search}" method="get">
   <input type="text" name="keyword" th:value="${keyword}"  placeholder="Find by Owner Name & Shop Type" size="50" >
   <button type="submit" class="btn btn-info" >Search</button>
@@ -28,11 +30,12 @@
       </thead>
       <tbody>
       <tr th:each="book : ${books}">
-        <td th:text="${book.name}"></td>
+        <td><a th:text="${book.name}" th:href="@{/book/{id}(id=${book.id})}"></a></td>
         <td th:text="${book.text}"></td>
         <td th:text="${book.autor}"></td>
-        <td><a th:href="@{/edit/{id}(id=${book.id})}">Edit</a></td>
-        <td><a th:href="@{/delete/{id}(id=${book.id})}">Delete</a></td>
+        <img th:src="@{'data:image/jpeg;base64,' + ${book.photoprevue}}" width="100px"/>
+        <td><a th:if="${#authorization.expression('hasAnyAuthority(''ROLE_ADMIN'')')}" th:href="@{/edit/{id}(id=${book.id})}">Edit</a></td>
+        <td><a th:if="${#authorization.expression('hasAnyAuthority(''ROLE_ADMIN'')')}" th:href="@{/delete/{id}(id=${book.id})}">Delete</a></td>
         <td><a th:href="@{/add-cart/{id}(id=${book.id})}">Добавить в корзину</a></td>
       </tr>
       </tbody>

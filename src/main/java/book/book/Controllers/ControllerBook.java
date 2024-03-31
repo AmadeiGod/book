@@ -1,25 +1,40 @@
 package book.book.Controllers;
 
 import book.book.Models.Book;
+import book.book.Models.Image;
 import book.book.Repo.BookRepository;
+import book.book.Repo.ImageRepository;
 import book.book.Service.BookServices;
+import book.book.Service.ImageServices;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.transaction.Transactional;
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.TransactionDefinition;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 @Controller
 public class ControllerBook {
     @Autowired
     private BookRepository bookRepository;
+    @Autowired
+    private ImageRepository imageRepository;
+    @Autowired
+    private ImageServices imageServices;
 
 
     @GetMapping("/admin")
@@ -33,12 +48,36 @@ public class ControllerBook {
     }
 
     @PostMapping("/addbook")
-    public String addBook(@Valid Book book, BindingResult result, Model model) {
-        if (result.hasErrors()) {
-            return "add-book";
+    public String addBook(@Valid Book book, BindingResult result, Model model,
+                          @RequestParam("image") MultipartFile[] multipartFile) throws IOException {
+        List<Image> list = book.getListImages();
+        for (MultipartFile multipartFile1 : multipartFile) {
+                Image image = imageServices.getimage(multipartFile1,book);
+                list.add(image);
+        }
+        try{
+            String imagePre1 = Base64.getEncoder().encodeToString(multipartFile[0].getBytes());
+            book.setPhotoprevue(imagePre1);
+        }catch (Exception e){
+            System.out.println("Нету картинки");
+        }
+        try{
+            String imagePre2 = Base64.getEncoder().encodeToString(multipartFile[1].getBytes());
+            book.setPhoto1(imagePre2);
+        }catch (Exception e){
+            System.out.println("Нету картинки");
+        }
+        try{
+            String imagePre3 = Base64.getEncoder().encodeToString(multipartFile[2].getBytes());
+            book.setPhoto2(imagePre3);
+        }catch (Exception e){
+            System.out.println("Нету картинки");
         }
 
+        book.setListImages(list);
         bookRepository.save(book);
+
+
         return "redirect:/index";
     }
 
@@ -74,6 +113,7 @@ public class ControllerBook {
         Book book = bookRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid book Id:" + id));
 
+        imageRepository.deleteAll(book.getListImages());
         bookRepository.delete(book);
         return "redirect:/index";
     }
@@ -97,4 +137,15 @@ public class ControllerBook {
             System.out.println("123");
         return "index";
     }
+    @Transactional
+    @GetMapping("/book/{id}")
+    public String bookpage(@PathVariable("id") long id, Model model, HttpServletResponse response) throws IOException {
+        Book book = bookRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid book Id:" + id));
+
+        model.addAttribute("book",book);
+
+        return "book/book";
+    }
+
 }
