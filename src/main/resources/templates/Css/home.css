@@ -1,4 +1,15 @@
 .header-top{
     background: #F9F9F9;
     height: 50px;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+
+}
+.header-top-text{
+    display: inline-block;
+    margin: auto;
+    margin-left: 0px;
+    margin-right: 0px;
+
 }

@@ -60,7 +60,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authenticationProvider(authenticationProvider())
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/index", "/registration", "/auth/login","/home","/book/*").permitAll()
+                        .requestMatchers("/index", "/registration", "/auth/login","/home","/book/*","/confirm-account*").permitAll()
                         .requestMatchers("/add-cart/{id}").hasAnyAuthority("USER","ADMIN")
                         .requestMatchers("/manager").hasAnyAuthority("ADMIN")
                         .anyRequest().authenticated()

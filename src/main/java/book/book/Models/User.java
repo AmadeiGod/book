@@ -15,6 +15,7 @@ public class User {
     private String password;
     private String email;
     private String role;
-
+    @Column(name = "user_enabled")
+    private boolean isEnabled;
 
 }
