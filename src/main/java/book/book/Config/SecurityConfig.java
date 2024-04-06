@@ -1,8 +1,6 @@
 package book.book.Config;
 
 
-import book.book.Service.UserDetailService;
-import book.book.Service.UserService;
 import book.book.Service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -12,27 +10,16 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.context.DelegatingSecurityContextRepository;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.security.web.context.RequestAttributeSecurityContextRepository;
 import org.springframework.security.web.context.SecurityContextRepository;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-
-import javax.sql.DataSource;
-
-import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 @EnableWebSecurity
@@ -60,7 +47,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authenticationProvider(authenticationProvider())
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/index", "/registration", "/auth/login","/home","/book/*","/confirm-account*").permitAll()
+                        .requestMatchers("/index", "/registration", "/auth/login","/home","/book/*","/confirm-account*","src/main/webapp/fonts/*","/Style/*****","/static/images/*").permitAll()
                         .requestMatchers("/add-cart/{id}").hasAnyAuthority("USER","ADMIN")
                         .requestMatchers("/manager").hasAnyAuthority("ADMIN")
                         .anyRequest().authenticated()
@@ -76,6 +63,17 @@ public class SecurityConfig {
                         .logoutSuccessUrl("/index"));
 
         return http.build();
+    }
+
+    public void configure(WebSecurity web) {
+        web.ignoring().requestMatchers(
+
+                // статика
+                "/css/**",
+                "/js/**",
+                "/src/main/webapp/fonts/**",
+                "/images/**"
+        );
     }
 
 

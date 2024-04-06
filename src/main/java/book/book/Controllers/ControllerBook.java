@@ -20,6 +20,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import javax.validation.Valid;
 import java.io.IOException;
@@ -35,7 +36,6 @@ public class ControllerBook {
     private ImageRepository imageRepository;
     @Autowired
     private ImageServices imageServices;
-
 
     @GetMapping("/admin")
     public String admin() {
@@ -81,10 +81,10 @@ public class ControllerBook {
         return "redirect:/index";
     }
 
-    @GetMapping("/index")
+    @GetMapping("/home")
     public String showUserList(Model model) {
         model.addAttribute("books", bookRepository.findAll());
-        return "index";
+        return "home";
     }
 
     @GetMapping("/edit/{id}")
