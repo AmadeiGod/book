@@ -12,5 +12,6 @@ public class Order {
     private Long id;
     private Long id_BBook;
     private Long id_CCart;
+    private Long id_userr;
 
 }

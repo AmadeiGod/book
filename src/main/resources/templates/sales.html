@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Акции</title>
+    <link rel="stylesheet" type="text/css" href="../static/Style/home.css" th:href="@{/Style/home.css}"/>
+</head>
+<body>
+<header>
+  <div class="header-top">
+    <div class="header-top-text">support@my.book</div>
+    <div class="header-top-text">+7(495)666-50-50</div>
+    <div class="header-top-text">
+      <a th:href="@{/logout}" sec:authorize="isAuthenticated()">Выход</a>
+      / Регистрация</div>
+  </div>
+  <div class="header-middle">
+    <div class="header-middle-img">
+      <img src="/static/images/icon.png" >
+    </div>
+    <div class="header-middle-form">
+      <form th:action="@{/search}" method="get">
+        <input  class="header-middle-form-input" type="text" name="keyword" th:value="${keyword}"  placeholder="Найти товар" >
+        <button class="header-middle-form-button" type="submit"  >Поиск</button>
+      </form>
+    </div>
+    <div class="header-middle-actions">
+      <div class="header-middle-actions-1">
+        <a href="/cart" class="header-middle-actions-a">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="feather feather-archive"><polyline points="21 8 21 21 3 21 3 8"></polyline><rect x="1" y="3" width="22" height="5"></rect><line x1="10" y1="12" x2="14" y2="12"></line></svg>
+          <p class="header-middle-actions-p">Мои заказы</p>
+        </a>
+      </div>
+      <div class="header-middle-actions-1">
+        <a href="/cart" class="header-middle-actions-a">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+          <p class="header-middle-actions-p">Избранное</p>
+        </a>
+      </div>
+      <div class="header-middle-actions-1">
+        <a href="/cart" class="header-middle-actions-a">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-bag"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+          <p class="header-middle-actions-p">Корзина</p>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="header-bottom">
+    <ul class="header-bottom-ul">
+      <li class="header-bottom-ul-li1">
+        <svg  xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="header-bottom-ul-svg"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+      </li>
+      <li class="header-bottom-ul-li">
+        <p class="header-bottom-p">Каталог</p>
+      </li>
+      <li class="header-bottom-ul-li">
+        <p class="header-bottom-p">Акции</p>
+      </li>
+      <li class="header-bottom-ul-li">
+        <p class="header-bottom-p">О компании</p>
+      </li>
+      <li class="header-bottom-ul-li">
+        <p class="header-bottom-p">Доставка и оплата</p>
+      </li>
+      <li class="header-bottom-ul-li">
+        <p class="header-bottom-p">Новости</p>
+      </li>
+      <li class="header-bottom-ul-li">
+        <p class="header-bottom-p">Контакты</p>
+      </li>
+    </ul>
+  </div>
+</header>
+<div class="inner">
+  <p class="navigation">Главная / Товары по акции</p>
+  <h1 class="maintext-h1">Товары по акции</h1>
+  <p class="maintext-p">Нет товаров по акции</p>
+</div>
+
+<footer>
+  <div class="fmenu">
+    <img src="/static/images/icon.png" >
+    <p class="fmenu-ligth">© 2024 Книжный мир</p>
+    <a class="fmenu-a">Политика конфиденциальности</a><br>
+    <a class="fmenu-a">Согласие на обработку персональных данных</a>
+    <p class="fmenu-tiny">Используя данный сайт, вы автоматически принимаете условия пользовательского соглашения и соглашаетесь с политикой конфиденциальности.
+      Указанные на сайте цены не являются публичной офертой и могут быть изменены в любое</p>
+  </div>
+  <div class="fmenu">
+    <h2 class="fmenu-h2">О магазине</h2>
+    <a class="fmenu-a1">Главная</a>
+    <a class="fmenu-a1">Акции</a>
+    <a class="fmenu-a1">О компании</a>
+    <a class="fmenu-a1">Доставка и оплата</a>
+    <a class="fmenu-a1">Контакты</a>
+    <a class="fmenu-a1">Новости</a>
+    <a class="fmenu-a1">Статьи</a>
+  </div>
+  <div class="fmenu-catalog">
+    <h2 class="fmenu-h2">Каталог</h2>
+    <a class="fmenu-a1">Детектив</a>
+    <a class="fmenu-a1">Научная фантастика</a>
+    <a class="fmenu-a1">Фантастика</a>
+    <a class="fmenu-a1">Приключение</a>
+  </div>
+  <div class="fmenu-contact-us">
+    <h2 class="fmenu-h2">Свяжитесь с нами</h2>
+    <a class="fmenu-a1">Имама Шамиляю., Дагестан 123412</a>
+    <div class="fmenu-div">
+      <p class="fmenu-ligth">E-mail</p>
+      <a class="fmenu-a1">support@my.book</a>
+    </div>
+    <a class="fmenu-a1">+7(495)666-50-50</a>
+    <div class="social-contact"></div>
+  </div>
+</footer>
+</body>
+</html>

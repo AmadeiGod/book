@@ -68,7 +68,7 @@ public class ControllerCart {
             cartRepository.save(cart);
             System.out.println("Книга" + book.getName() + " добавлена в корзину");
         }
-        return "redirect:/index";
+        return "redirect:/home";
     }
     @GetMapping("cart/delete/{id}")
     public String deleteBook(@PathVariable("id") long id, Model model,Authentication authentication) {

@@ -149,6 +149,8 @@ svg{
     width: 84%;
     margin-left: 7%;
     margin-right: 7%;
+    padding-top: 40px;
+    padding-bottom: 60px;
 }
 .item-list{
 
@@ -181,4 +183,119 @@ img{
 }
 .book-buy{
     margin-top: 10px;
+}
+.triggers{
+    white-space: nowrap;
+    margin-top: 30px;
+    margin-bottom: 40px;
+    display: flex;
+}
+.trigger{
+    display: flex;
+    align-items: center;
+    width: 25%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-right: 20px;
+}
+
+.trigger-text{
+    white-space: normal;
+    display: inline-block;
+    margin: auto;
+    font-size: 1.125rem;
+    font-family: IBMPlexSans-Light;
+}
+.trigger svg{
+    margin-right: 10px;
+}
+.trigger-svg1{
+    width: 70px;
+    height: 70px;
+}
+.trigger-svg2{
+    width: 50px;
+    height: 50px;
+}
+.trigger-svg3{
+    width: 50px;
+    height: 50px;
+}
+.trigger-svg4{
+    width: 70px;
+    height: 70px;
+}
+.maintext{
+    margin-top: 60px;
+}
+.maintext-h1{
+    font-size: 36px;
+    font-family: IBMPlexSans-Regular;
+}
+.maintext-h3{
+    font-size: 24px;
+    font-family: IBMPlexSans-Regular;
+}
+.maintext-p{
+    font-family: IBMPlexSans-Light;
+    line-height: 1.5
+}
+footer{
+    padding-left: 7%;
+    padding-right: 7%;
+    background: #F8F8F8;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+.fmenu img{
+    max-height: 80px;
+    max-width: 250px;
+    height: auto;
+}
+.fmenu {
+    display: inline-block;
+   max-width: 25%;
+
+}
+.fmenu-h2{
+    font-family: IBMPlexSans-Regular;
+    color: #6B6B6B;
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+.fmenu-a1{
+    display: block;
+    font-family: IBMPlexSans-Regular;
+    margin-bottom: 8px;
+    margin-top: 8px;
+    line-height: 1.5;
+}
+.fmenu-a{
+    font-family: IBMPlexSans-Regular;
+    margin-bottom: 5px;
+}
+.fmenu-tiny{
+    font-size: 12px;
+    font-family: IBMPlexSans-Light;
+    margin-top: 15px;
+    color: #919191;
+}
+.fmenu-ligth{
+    font-family: IBMPlexSans-Regular;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+.fmenu-catalog{
+    display: inline-block;
+}
+.fmenu-contact-us{
+    display: inline-block;
+}
+.navigation{
+    font-size: 14px;
+    font-family: IBMPlexSans-Regular;
+    color: #606060;
 }

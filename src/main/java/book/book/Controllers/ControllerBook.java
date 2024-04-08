@@ -78,7 +78,7 @@ public class ControllerBook {
         bookRepository.save(book);
 
 
-        return "redirect:/index";
+        return "redirect:/home";
     }
 
     @GetMapping("/home")
@@ -105,7 +105,7 @@ public class ControllerBook {
         }
 
         bookRepository.save(book);
-        return "redirect:/index";
+        return "redirect:/home";
     }
 
     @GetMapping("/delete/{id}")
@@ -115,7 +115,7 @@ public class ControllerBook {
 
         imageRepository.deleteAll(book.getListImages());
         bookRepository.delete(book);
-        return "redirect:/index";
+        return "redirect:/home";
     }
 
 

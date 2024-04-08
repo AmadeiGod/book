@@ -40,7 +40,8 @@ public class ControllerOrder {
                 Cart cart2 = cart1.get();
                 Order order = new Order();
                 order.setId_CCart(cart2.getId());
-                order.setId_BBook(user.getId());
+                order.setId_BBook(cart2.getIdBook());
+                order.setId_userr(user.getId());
                 orderRepository.save(order);
             }
         }
@@ -54,6 +55,6 @@ public class ControllerOrder {
             }
         }
 
-        return "redirect:index";
+        return "redirect:home";
     }
 }

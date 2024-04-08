@@ -47,7 +47,7 @@ public class ControllerUser {
     @PostMapping("/logout")
     public String performLogout(Authentication authentication, HttpServletRequest request, HttpServletResponse response) {
         this.logoutHandler.logout(request, response, authentication);
-        return "redirect:/index";
+        return "redirect:/home";
     }
     @GetMapping("/logout")
     public String logout(HttpServletRequest request, HttpServletResponse response) {
@@ -56,6 +56,6 @@ public class ControllerUser {
             new SecurityContextLogoutHandler().logout(request, response, auth);
         }
         SecurityContextHolder.getContext().setAuthentication(null);
-        return "redirect:/index";
+        return "redirect:/home";
     }
 }
