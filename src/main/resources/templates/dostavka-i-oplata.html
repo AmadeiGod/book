@@ -12,12 +12,18 @@
     <div class="header-top-text">support@my.book</div>
     <div class="header-top-text">+7(495)666-50-50</div>
     <div class="header-top-text">
-      <a th:href="@{/logout}" sec:authorize="isAuthenticated()">Выход</a>
-      / Регистрация</div>
+      <a th:href="@{/auth/login}">Вход /</a>
+
+      <a th:href="@{/user/logout}" sec:authorize="isAuthenticated()">Выход /</a>
+
+      <a th:href="@{/registration}">Регистрация</a>
+    </div>
   </div>
   <div class="header-middle">
     <div class="header-middle-img">
-      <img src="/static/images/icon.png" >
+      <a href="/home">
+        <img src="/static/images/icon.png" >
+      </a>
     </div>
     <div class="header-middle-form">
       <form th:action="@{/search}" method="get">
@@ -49,25 +55,39 @@
   <div class="header-bottom">
     <ul class="header-bottom-ul">
       <li class="header-bottom-ul-li1">
-        <svg  xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="header-bottom-ul-svg"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+        <a href="/home">
+          <svg  xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="header-bottom-ul-svg"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+        </a>
       </li>
       <li class="header-bottom-ul-li">
-        <p class="header-bottom-p">Каталог</p>
+        <a href="/home">
+          <p class="header-bottom-p">Каталог</p>
+        </a>
       </li>
       <li class="header-bottom-ul-li">
-        <p class="header-bottom-p">Акции</p>
+        <a href="/sales">
+          <p class="header-bottom-p">Акции</p>
+        </a>
       </li>
       <li class="header-bottom-ul-li">
-        <p class="header-bottom-p">О компании</p>
+        <a href="/O-kompanii">
+          <p class="header-bottom-p">О компании</p>
+        </a>
       </li>
       <li class="header-bottom-ul-li">
-        <p class="header-bottom-p">Доставка и оплата</p>
+        <a href="/dostavka-i-oplata">
+          <p class="header-bottom-p">Доставка и оплата</p>
+        </a>
       </li>
       <li class="header-bottom-ul-li">
-        <p class="header-bottom-p">Новости</p>
+        <a href="/news">
+          <p class="header-bottom-p">Новости</p>
+        </a>
       </li>
       <li class="header-bottom-ul-li">
-        <p class="header-bottom-p">Контакты</p>
+        <a href="/kontakty">
+          <p class="header-bottom-p">Контакты</p>
+        </a>
       </li>
     </ul>
   </div>

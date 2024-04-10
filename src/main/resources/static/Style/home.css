@@ -59,6 +59,7 @@ body{
     margin-top: 4px;
 }
 .header-top-text{
+    cursor: pointer;
     display: inline-block;
     margin-bottom: auto;
     margin-top: auto;
@@ -90,7 +91,7 @@ body{
     border-radius: 3px;
 }
 .header-middle-form-button{
-    padding:15px;
+    padding:16px;
     padding-right: 18px;
     padding-left: 18px;
     background: #C4001F;
@@ -156,10 +157,12 @@ svg{
 
 }
 .book-item{
-    width: 24%;
+    width: calc(20% - 22px);
     display: inline-block;
     border: 1px solid #E3E3E3;
     border-radius: 5px;
+    margin-right: 16px;
+    margin-bottom: 16px;
 }
 .book-item:hover{
     border: 1px solid #606060;
@@ -298,4 +301,144 @@ footer{
     font-size: 14px;
     font-family: IBMPlexSans-Regular;
     color: #606060;
+}
+.header-bottom-p:hover{
+    color: #CE0029;
+}
+.header-middle-form-button{
+    cursor: pointer;
+}
+.header-top-text:hover{
+    color: #CE0029;
+}
+.swiper-slide{
+    text-align: left;
+}
+.swiper-wrapper img{
+    position: relative;
+}
+.swiper-p{
+    color: white;
+    font-size: 50px;
+    font-family: IBMPlexSans-Medium;
+    transform: translate(-30px,-70px);
+}
+.swiper-p2{
+    color: white;
+    font-family: IBMPlexSans-Medium;
+    transform: translate(-13px,0px);
+}
+.swiper-wrapper p{
+    color: white;
+    position: absolute;
+}
+.swiper-wrapper button{
+    padding: 15px 30px 15px 30px;
+    background: #C4001F;
+    font-family: IBMPlexSans-Medium;
+    font-size: 15px;
+    border: 0px;
+    color: white;
+    border-radius: 5px;
+    transform: translate(-500px,100px);
+    position: absolute;
+}
+.swiper-wrapper button:hover {
+    background: #CE0029;
+    cursor: pointer;
+}
+.addbook-form input{
+    display: block;
+    border: 0px;
+    border-bottom: 1px solid #CECECE;
+    width: 70%;
+    padding-bottom: 15px;
+    padding-top: 15px;
+    margin-bottom: 25px;
+    margin-top: 25px;
+    padding-left: 15px;
+}
+.addbook-form{
+    width: 50%;
+}
+.form-div-photo label{
+    display: inline-block;
+}
+.form-div-photo input{
+    display: inline-block;
+    border: 0px;
+}
+.form-button{
+    background: #CE0029;
+    width: 20px;
+    color: white;
+    font-family: IBMPlexSans-Regular;
+}
+.book-name{
+    font-family: IBMPlexSans-Bold;
+    line-height: 1.35;
+    color: black;
+}
+.book-text{
+    line-height: 1.5;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    color: #606060;
+    overflow: hidden;
+    font-size: 14px;
+    max-height: calc(14px* 1.5* 2);
+}
+.book-price{
+    font-family: IBMPlexSans-Bold;
+    font-size: 20px;
+    display: inline-block;
+}
+.book-buy-div{
+    display: flex;
+}
+.book-buy{
+    display: block;
+    font-size: 14px;
+    background: #213357;
+    color: white;
+    font-family: IBMPlexSans-Regular;
+    border-radius: 5px;
+    width: 100%;
+    height: auto;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-top: 10px;
+    text-align: center;
+}
+input{
+    font-family: IBMPlexSans-Regular;
+}
+
+#login-button{
+    display: inline-block;
+    width: auto;
+    background: #213357;
+    color: white;
+    font-size: 18px;
+    padding-left: 45px;
+    padding-right: 45px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    border-radius: 3px;
+    font-family: IBMPlexSans-Medium;
+}
+#login-button:hover{
+    background: white;
+    border: 1px solid #213357;
+    color: #213357;
+    transition: .3s background;
+    cursor: pointer;
+}
+.login-a{
+    margin-left: 162px;
+    font-family: IBMPlexSans-Regular;
+    text-decoration: underline;
+}
+a{
+    cursor: pointer;
 }

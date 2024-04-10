@@ -78,15 +78,6 @@ public class RegistrationController {
             emailSenderService.sendEmail(mailMessage);
 
 
-            /*SimpleMailMessage email = new SimpleMailMessage();
-            String recipientAddress = user.getEmail();
-            String subject = "Registration Confirmation";
-            email.setFrom(String.valueOf(new InternetAddress("daudmammaev@yandex.ru")));
-            email.setTo(recipientAddress);
-            email.setText("blabla");
-            email.setSubject(subject);
-            mailSender.send(email);*/
-
         }catch(Exception e)
         {
             System.out.println(e);
@@ -114,7 +105,7 @@ public class RegistrationController {
             System.out.println("error");
         }
 
-        return "/auth/login";
+        return "/login";
     }
 
 }

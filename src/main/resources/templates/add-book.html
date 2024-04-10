@@ -1,25 +1,151 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>add-book</title>
+    <title>Добавить книгу</title>
+    <link rel="stylesheet" type="text/css" href="../static/Style/home.css" th:href="@{/Style/home.css}"/>
 </head>
+<header>
+    <div class="header-top">
+        <div class="header-top-text">support@my.book</div>
+        <div class="header-top-text">+7(495)666-50-50</div>
+        <div class="header-top-text">
+            <a th:href="@{/logout}" sec:authorize="isAuthenticated()">Выход</a>
+            / Регистрация</div>
+    </div>
+    <div class="header-middle">
+        <div class="header-middle-img">
+            <img src="/static/images/icon.png" >
+        </div>
+        <div class="header-middle-form">
+            <form th:action="@{/search}" method="get">
+                <input  class="header-middle-form-input" type="text" name="keyword" th:value="${keyword}"  placeholder="Найти товар" >
+                <button class="header-middle-form-button" type="submit"  >Поиск</button>
+            </form>
+        </div>
+        <div class="header-middle-actions">
+            <div class="header-middle-actions-1">
+                <a href="/cart" class="header-middle-actions-a">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="feather feather-archive"><polyline points="21 8 21 21 3 21 3 8"></polyline><rect x="1" y="3" width="22" height="5"></rect><line x1="10" y1="12" x2="14" y2="12"></line></svg>
+                    <p class="header-middle-actions-p">Мои заказы</p>
+                </a>
+            </div>
+            <div class="header-middle-actions-1">
+                <a href="/cart" class="header-middle-actions-a">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                    <p class="header-middle-actions-p">Избранное</p>
+                </a>
+            </div>
+            <div class="header-middle-actions-1">
+                <a href="/cart" class="header-middle-actions-a">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-bag"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+                    <p class="header-middle-actions-p">Корзина</p>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="header-bottom">
+        <ul class="header-bottom-ul">
+            <li class="header-bottom-ul-li1">
+                <a href="/home">
+                    <svg  xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="header-bottom-ul-svg"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                </a>
+            </li>
+            <li class="header-bottom-ul-li">
+                <a href="/home">
+                    <p class="header-bottom-p">Каталог</p>
+                </a>
+            </li>
+            <li class="header-bottom-ul-li">
+                <a href="/sales">
+                    <p class="header-bottom-p">Акции</p>
+                </a>
+            </li>
+            <li class="header-bottom-ul-li">
+                <a href="/O-kompanii">
+                    <p class="header-bottom-p">О компании</p>
+                </a>
+            </li>
+            <li class="header-bottom-ul-li">
+                <a href="/dostavka-i-oplata">
+                    <p class="header-bottom-p">Доставка и оплата</p>
+                </a>
+            </li>
+            <li class="header-bottom-ul-li">
+                <a href="/news">
+                    <p class="header-bottom-p">Новости</p>
+                </a>
+            </li>
+            <li class="header-bottom-ul-li">
+                <a href="/kontakty">
+                    <p class="header-bottom-p">Контакты</p>
+                </a>
+            </li>
+        </ul>
+    </div>
+</header>
 <body>
-<form action="#" th:action="@{/addbook}" th:object="${book}" method="post" enctype="multipart/form-data">
-    <label for="name">Name</label>
-    <input type="text" th:field="*{name}" id="name" placeholder="Name">
-    <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+<div class="inner">
+    <p class="navigation">Главная / Добавить книгу</p>
+    <h1 class="maintext-h1">Добавить книгу</h1>
 
-    <label for="text">Text</label>
-    <input type="text" th:field="*{text}" id="text" placeholder="Text">
+    <form class="addbook-form" enctype="multipart/form-data" action="#" th:action="@{/addbook}" th:object="${book}" method="post" >
+        <input type="text" th:field="*{name}" id="name" placeholder="Имя книги">
 
-    <label for="autor">Autor</label>
-    <input type="text" th:field="*{autor}" id="autor" placeholder="Autor">
+        <input type="text" th:field="*{text}" id="text" placeholder="Описание">
 
-    <label>Photos: </label>
-    <input type="file" name="image" accept="image/png, image/jpeg" multiple />
+        <input type="text" th:field="*{autor}" id="autor" placeholder="Автор">
 
-    <input type="submit" value="Add Book">
-</form>
+        <input type="text" th:field="*{price}" id="price" placeholder="Цена">
+
+        <input type="text" th:field="*{count_page}" id="count_page" placeholder="Кол-во страниц">
+
+
+        <div class="form-div-photo">
+            <label>Photos: </label>
+            <input type="file" name="image" accept="image/png, image/jpeg" multiple />
+        </div>
+
+        <input class="form-button" type="submit" value="Добавить книгу" style="cursor: pointer">
+    </form>
+</div>
+
+<footer>
+    <div class="fmenu">
+        <img src="/static/images/icon.png" >
+        <p class="fmenu-ligth">© 2024 Книжный мир</p>
+        <a class="fmenu-a">Политика конфиденциальности</a><br>
+        <a class="fmenu-a">Согласие на обработку персональных данных</a>
+        <p class="fmenu-tiny">Используя данный сайт, вы автоматически принимаете условия пользовательского соглашения и соглашаетесь с политикой конфиденциальности.
+            Указанные на сайте цены не являются публичной офертой и могут быть изменены в любое</p>
+    </div>
+    <div class="fmenu">
+        <h2 class="fmenu-h2">О магазине</h2>
+        <a class="fmenu-a1">Главная</a>
+        <a class="fmenu-a1">Акции</a>
+        <a class="fmenu-a1">О компании</a>
+        <a class="fmenu-a1">Доставка и оплата</a>
+        <a class="fmenu-a1">Контакты</a>
+        <a class="fmenu-a1">Новости</a>
+        <a class="fmenu-a1">Статьи</a>
+    </div>
+    <div class="fmenu-catalog">
+        <h2 class="fmenu-h2">Каталог</h2>
+        <a class="fmenu-a1">Детектив</a>
+        <a class="fmenu-a1">Научная фантастика</a>
+        <a class="fmenu-a1">Фантастика</a>
+        <a class="fmenu-a1">Приключение</a>
+    </div>
+    <div class="fmenu-contact-us">
+        <h2 class="fmenu-h2">Свяжитесь с нами</h2>
+        <a class="fmenu-a1">Имама Шамиляю., Дагестан 123412</a>
+        <div class="fmenu-div">
+            <p class="fmenu-ligth">E-mail</p>
+            <a class="fmenu-a1">support@my.book</a>
+        </div>
+        <a class="fmenu-a1">+7(495)666-50-50</a>
+        <div class="social-contact"></div>
+    </div>
+</footer>
 </body>
 </html>

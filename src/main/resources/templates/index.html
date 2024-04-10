@@ -10,7 +10,6 @@
 <a href="/index">Главная</a>
 <a  href="/manager">Manager</a>
 <a th:href="@{/user/personalpage}">Профиль</a>
-<a th:href="@{/user/logout}" sec:authorize="isNotAuthenticated()">Вход</a>
 <a th:href="@{/user/logout}" sec:authorize="isAuthenticated()">Выйти</a>
 <form th:action="@{/search}" method="get">
   <input type="text" name="keyword" th:value="${keyword}"  placeholder="Find by Owner Name & Shop Type" size="50" >

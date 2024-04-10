@@ -2,7 +2,7 @@
 <html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
   <meta charset="UTF-8">
-  <title>Новости</title>
+  <title>Поиск</title>
   <link rel="stylesheet" type="text/css" href="../static/Style/home.css" th:href="@{/Style/home.css}"/>
 </head>
 <body>
@@ -92,9 +92,22 @@
   </div>
 </header>
 <div class="inner">
-  <p class="navigation">Главная / Новости</p>
-  <h1 class="maintext-h1">Новости</h1>
-  <p class="maintext-p">В разработке...</p>
+  <div class="book-item" th:each="book : ${list}">
+    <div class="book-item-img">
+      <img th:src="@{'data:image/jpeg;base64,' + ${book.photoprevue}}" width="250px" height="250px"/>
+    </div>
+    <div class="book-content">
+      <a class="book-name" th:text="${book.name}" th:href="@{/book/{id}(id=${book.id})}"></a>
+      <p class="book-text" th:text="${book.text}"></p>
+      <div class="book-buy-div">
+        <p class="book-price" th:text="${book.price}"></p>
+        <p class="book-price">.00 руб.</p>
+      </div>
+      <a class="book-buy" th:href="@{/add-cart/{id}(id=${book.id})}">Купить</a>
+      <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/edit/{id}(id=${book.id})}">Edit</a>
+      <a th:if="${#authorization.expression('hasAnyAuthority(''ROLE_ADMIN'')')}" th:href="@{/delete/{id}(id=${book.id})}">Delete</a>
+    </div>
+  </div>
 </div>
 <footer>
   <div class="fmenu">

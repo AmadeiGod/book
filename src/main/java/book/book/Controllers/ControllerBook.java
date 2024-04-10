@@ -48,7 +48,7 @@ public class ControllerBook {
     }
 
     @PostMapping("/addbook")
-    public String addBook(@Valid Book book, BindingResult result, Model model,
+    public String addBook(@Valid Book book,
                           @RequestParam("image") MultipartFile[] multipartFile) throws IOException {
         List<Image> list = book.getListImages();
         for (MultipartFile multipartFile1 : multipartFile) {
@@ -121,6 +121,7 @@ public class ControllerBook {
 
     @Autowired
     private BookServices service;
+    @Transactional
     @RequestMapping(path = {"/","/search"})
     public String home(Book book, Model model, String keyword,@RequestParam(defaultValue = "1") int page) {
         if(keyword != "") {
@@ -131,11 +132,11 @@ public class ControllerBook {
 
         }else {
             List<Book> list = service.getAllShops();
-            Pageable pageable = PageRequest.of(0,6,Sort.by("name"));
+            Pageable pageable = PageRequest.of(0,15,Sort.by("name"));
             Page<Book> page1 = bookRepository.findAll(pageable);
             model.addAttribute("list", page1);}
             System.out.println("123");
-        return "index";
+        return "search";
     }
     @Transactional
     @GetMapping("/book/{id}")

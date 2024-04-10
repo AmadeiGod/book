@@ -24,6 +24,13 @@ public class Book {
     @Size(min=2, max = 50)
     private String autor;
 
+    private String price;
+    private String proizvoditel;
+    private String format;
+    private String pereplet;
+    private String count_page;
+
+
     private String photoprevue;
     private String photo1;
     private String photo2;

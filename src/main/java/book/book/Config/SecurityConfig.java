@@ -47,7 +47,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authenticationProvider(authenticationProvider())
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/index", "/registration", "/auth/login","/home","/book/*","/confirm-account*","src/main/webapp/fonts/*","/Style/*****","/static/images/*").permitAll()
+                        .requestMatchers("/index", "/registration", "/auth/login","/home","/book/*","/confirm-account*","src/main/webapp/fonts/*","/Style/*****","static/fonts/*","static/images/swiper/*","static/images/*","/","/search","/search/*").permitAll()
                         .requestMatchers("/add-cart/{id}").hasAnyAuthority("USER","ADMIN")
                         .requestMatchers("/manager").hasAnyAuthority("ADMIN")
                         .anyRequest().authenticated()
@@ -55,12 +55,12 @@ public class SecurityConfig {
                 .formLogin((form) -> form
                         .loginPage("/auth/login")
                         .loginProcessingUrl("/process_login")
-                        .defaultSuccessUrl("/index")
+                        .defaultSuccessUrl("/home")
                         .permitAll()
                 )
                 .logout((logout) -> logout
                         .logoutUrl("/user/logout")
-                        .logoutSuccessUrl("/index"));
+                        .logoutSuccessUrl("/home"));
 
         return http.build();
     }

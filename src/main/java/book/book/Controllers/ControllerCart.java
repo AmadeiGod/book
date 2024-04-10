@@ -49,7 +49,7 @@ public class ControllerCart {
         return "cart";
     }
     @GetMapping("/add-cart/{id}")
-    public String addCart(@PathVariable ("id") long id, Authentication authentication, Model model){
+    public String addCart(@PathVariable ("id") long id, Authentication authentication ){
         User user = userService.findUserByUsername(authentication.getName());
         Book book = bookRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid book Id:" + id));
