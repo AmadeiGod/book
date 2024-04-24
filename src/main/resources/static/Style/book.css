@@ -1,0 +1,33 @@
+.swiper-container mySwiper{
+    width: 20%;
+}
+.center-prevue{
+    width: calc(60% - 300px);
+
+}
+.right-prevue{
+    width: 300px;
+    align-items: center;
+    text-align: center;
+}
+#swiper{
+    display: inline-block;
+    margin: 30px;
+    width: 30%;
+}
+
+.book-prevue{
+    display: flex;
+}
+.book-prevue p{
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+#right{
+    transform: translate(350px, -300px);
+    position: sticky;
+}
+#left{
+    transform: translate(-10px, -325px);
+    position: sticky;
+}

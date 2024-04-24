@@ -1,8 +1,10 @@
 package book.book.Config;
 
 
+import jakarta.persistence.Basic;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -18,6 +20,10 @@ public class Configuration implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/static/**")
                 .addResourceLocations("classpath:/static/");
+    }
+    @Bean
+    public RestTemplate restTemplate(){
+        return new RestTemplate();
     }
     /*
     @Bean

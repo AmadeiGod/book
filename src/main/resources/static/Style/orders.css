@@ -1,0 +1,12 @@
+.orders-div p,a{
+    width: 20%;
+}
+
+.orders-div{
+    padding: 5px;
+    border: #6B6B6B 1px solid;
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

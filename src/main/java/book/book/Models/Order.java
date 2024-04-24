@@ -10,8 +10,10 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
-    private Long id_BBook;
-    private Long id_CCart;
-    private Long id_userr;
+    @ManyToOne
+    private Book book;
+    private Long orderIdCart;
+    private Long orderIdUser;
+    private int countBuyBook;
 
 }

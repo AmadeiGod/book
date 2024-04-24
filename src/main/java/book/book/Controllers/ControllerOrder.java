@@ -1,5 +1,6 @@
 package book.book.Controllers;
 
+import book.book.Models.Book;
 import book.book.Models.Cart;
 import book.book.Models.Order;
 import book.book.Models.User;
@@ -8,9 +9,11 @@ import book.book.Repo.CartRepository;
 import book.book.Repo.OrderRepository;
 import book.book.Repo.UserRepository;
 import book.book.Service.UserService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.Collections;
@@ -34,27 +37,44 @@ public class ControllerOrder {
     public String buy_order(Authentication authentication) {
         User user = userRepository.findByUsername(authentication.getName());
         List<Cart> cartlist = cartRepository.findAllByUsernameId(user.getId());
-        for (Cart cart: cartlist){
-            Optional<Cart> cart1 = cartRepository.findByUsernameIdAndIdBook(user.getId(),cart.getIdBook());
-            if(cart1.isPresent()){
-                Cart cart2 = cart1.get();
-                Order order = new Order();
-                order.setId_CCart(cart2.getId());
-                order.setId_BBook(cart2.getIdBook());
-                order.setId_userr(user.getId());
-                orderRepository.save(order);
-            }
-        }
-        for (Cart cart: cartlist){
-            Optional<Cart> cart1 = cartRepository.findByUsernameIdAndIdBook(user.getId(),cart.getIdBook());
-            cartRepository.deleteAllById(Collections.singleton(user.getId()));
-            if(cart1.isPresent()){
-                Cart cart2 = cart1.get();
-                cartRepository.delete(cart2);
+        if(user.isEnabled()){
+            for (Cart cart: cartlist){
+                Optional<Cart> cart1 = cartRepository.findByUsernameIdAndIdBook(user.getId(),cart.getIdBook());
 
+                if(cart1.isPresent()){
+                    Cart cart2 = cart1.get();
+                    Order order = new Order();
+                    order.setOrderIdCart(cart2.getId());
+                    Book book = bookRepository.findById(cart2.getIdBook())
+                            .orElseThrow(() -> new IllegalArgumentException("Invalid book Id:" ));
+                    order.setBook(book);
+                    order.setOrderIdUser(user.getId());
+                    order.setCountBuyBook(cart2.getCountBook());
+                    orderRepository.save(order);
+                }
             }
-        }
+            for (Cart cart: cartlist){
+                Optional<Cart> cart1 = cartRepository.findByUsernameIdAndIdBook(user.getId(),cart.getIdBook());
+                cartRepository.deleteAllById(Collections.singleton(user.getId()));
+                if(cart1.isPresent()){
+                    Cart cart2 = cart1.get();
+                    cartRepository.delete(cart2);
 
-        return "redirect:home";
+                }
+            }
+            return "redirect:home";
+        }else{
+            System.out.println("Аккаунт не активирован");
+            return "cart";
+        }
     }
+    @Transactional
+    @GetMapping("/orders")
+    public String orders(Authentication authentication, Model model) {
+        User user = userRepository.findByUsername(authentication.getName());
+        model.addAttribute("list_orders",orderRepository.findAllByOrderIdUser(user.getId()));
+
+        return "orders";
+    }
+
 }

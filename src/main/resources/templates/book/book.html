@@ -1,13 +1,225 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Акции</title>
+    <link rel="stylesheet" type="text/css" href="/static/Style/home.css" th:href="@{/Style/home.css}"/>
+    <link rel="stylesheet" type="text/css" href="/static/Style/book.css" th:href="@{/Style/book.css}"/>
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"
+    />
+
+    <link
+            rel="stylesheet"
+            href="https://unpkg.com/swiper/swiper-bundle.min.css"
+    />
+
+
+    <style>
+
+
+        .swiper-container {
+            width: 40%;
+            max-height: 40%;
+            overflow: hidden;
+        }
+
+        .swiper-slide {
+            text-align: center;
+            font-size: 18px;
+            background: #fff;
+
+            /* Center slide text vertically */
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            -webkit-justify-content: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            -webkit-align-items: center;
+            align-items: center;
+        }
+
+        .swiper-slide img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
 </head>
 <body>
-<div th:each="bookk : ${book}">
-    <img  th:src="@{'data:image/jpeg;base64,' + ${bookk.photo1}}" width="100px">
-    <img  th:src="@{'data:image/jpeg;base64,' + ${bookk.photo2}}" width="100px">
+<header>
+    <div class="header-top">
+        <div class="header-top-text">support@my.book</div>
+        <div class="header-top-text">+7(495)666-50-50</div>
+        <div class="header-top-text">
+            <a th:href="@{/auth/login}">Вход /</a>
+
+            <a th:href="@{/user/logout}" sec:authorize="isAuthenticated()">Выход /</a>
+
+            <a th:href="@{/registration}">Регистрация</a>
+        </div>
+    </div>
+    <div class="header-middle">
+        <div class="header-middle-img">
+            <a href="/home">
+                <img src="/static/images/icon.png" >
+            </a>
+        </div>
+        <div class="header-middle-form">
+            <form th:action="@{/search}" method="get">
+                <input  class="header-middle-form-input" type="text" name="keyword" th:value="${keyword}"  placeholder="Найти товар" >
+                <button class="header-middle-form-button" type="submit"  >Поиск</button>
+            </form>
+        </div>
+        <div class="header-middle-actions">
+            <div class="header-middle-actions-1">
+                <a href="/orders" class="header-middle-actions-a">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="feather feather-archive"><polyline points="21 8 21 21 3 21 3 8"></polyline><rect x="1" y="3" width="22" height="5"></rect><line x1="10" y1="12" x2="14" y2="12"></line></svg>
+                    <p class="header-middle-actions-p">Мои заказы</p>
+                </a>
+            </div>
+            <div class="header-middle-actions-1">
+                <a href="/cart" class="header-middle-actions-a">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                    <p class="header-middle-actions-p">Избранное</p>
+                </a>
+            </div>
+            <div class="header-middle-actions-1">
+                <a href="/cart" class="header-middle-actions-a">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-bag"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+                    <p class="header-middle-actions-p">Корзина</p>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="header-bottom">
+        <ul class="header-bottom-ul">
+            <li class="header-bottom-ul-li1">
+                <a href="/home">
+                    <svg  xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="header-bottom-ul-svg"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                </a>
+            </li>
+            <li class="header-bottom-ul-li">
+                <a href="/home">
+                    <p class="header-bottom-p">Каталог</p>
+                </a>
+            </li>
+            <li class="header-bottom-ul-li">
+                <a href="/sales">
+                    <p class="header-bottom-p">Акции</p>
+                </a>
+            </li>
+            <li class="header-bottom-ul-li">
+                <a href="/O-kompanii">
+                    <p class="header-bottom-p">О компании</p>
+                </a>
+            </li>
+            <li class="header-bottom-ul-li">
+                <a href="/dostavka-i-oplata">
+                    <p class="header-bottom-p">Доставка и оплата</p>
+                </a>
+            </li>
+            <li class="header-bottom-ul-li">
+                <a href="/news">
+                    <p class="header-bottom-p">Новости</p>
+                </a>
+            </li>
+            <li class="header-bottom-ul-li">
+                <a href="/kontakty">
+                    <p class="header-bottom-p">Контакты</p>
+                </a>
+            </li>
+        </ul>
+    </div>
+</header>
+<div th:each="book : ${book}" class="inner">
+    <p class="navigation">Главная / Книга</p>
+    <h1 class="maintext-h1" id="book-prevue-h1" th:text="${book.name}"></h1>
+    <div class="book-prevue" >
+        <div id="swiper" class="swiper-container mySwiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"><img  th:src="@{'data:image/jpeg;base64,' + ${book.photoprevue}}" width="100px"></div>
+                <div class="swiper-slide"><img  th:src="@{'data:image/jpeg;base64,' + ${book.photo1}}" width="100px"></div>
+                <div class="swiper-slide"><img  th:src="@{'data:image/jpeg;base64,' + ${book.photo2}}" width="100px"></div>
+            </div>
+            <div id="right"  class="swiper-button-next"></div>
+            <div id="left" class="swiper-button-prev"></div>
+        </div>
+        <div class="center-prevue">
+            <h1 class="maintext-h1"> О товаре</h1>
+            <p th:text="${book.text}"></p>
+            <h1 class="maintext-h1"> Характеристики</h1>
+            <p th:text="${book.autor}"></p>
+            <p th:text="${book.count_page}"></p>
+            <p th:text="${book.proizvoditel}"></p>
+        </div>
+        <div class="right-prevue">
+            <div class="book-buy-div">
+                <p class="book-price" th:text="${book.price}"></p>
+                <p class="book-price">.00 руб.</p>
+            </div>
+            <a class="book-buy" th:href="@{/add-cart/{id}(id=${book.id})}">Купить</a>
+        </div>
+    </div>
 </div>
+<footer>
+    <div class="fmenu">
+        <img src="/static/images/icon.png" >
+        <p class="fmenu-ligth">© 2024 Книжный мир</p>
+        <a class="fmenu-a">Политика конфиденциальности</a><br>
+        <a class="fmenu-a">Согласие на обработку персональных данных</a>
+        <p class="fmenu-tiny">Используя данный сайт, вы автоматически принимаете условия пользовательского соглашения и соглашаетесь с политикой конфиденциальности.
+            Указанные на сайте цены не являются публичной офертой и могут быть изменены в любое</p>
+    </div>
+    <div class="fmenu">
+        <h2 class="fmenu-h2">О магазине</h2>
+        <a class="fmenu-a1">Главная</a>
+        <a class="fmenu-a1">Акции</a>
+        <a class="fmenu-a1">О компании</a>
+        <a class="fmenu-a1">Доставка и оплата</a>
+        <a class="fmenu-a1">Контакты</a>
+        <a class="fmenu-a1">Новости</a>
+        <a class="fmenu-a1">Статьи</a>
+    </div>
+    <div class="fmenu-catalog">
+        <h2 class="fmenu-h2">Каталог</h2>
+        <a class="fmenu-a1">Детектив</a>
+        <a class="fmenu-a1">Научная фантастика</a>
+        <a class="fmenu-a1">Фантастика</a>
+        <a class="fmenu-a1">Приключение</a>
+    </div>
+    <div class="fmenu-contact-us">
+        <h2 class="fmenu-h2">Свяжитесь с нами</h2>
+        <a class="fmenu-a1">Имама Шамиляю., Дагестан 123412</a>
+        <div class="fmenu-div">
+            <p class="fmenu-ligth">E-mail</p>
+            <a class="fmenu-a1">support@my.book</a>
+        </div>
+        <a class="fmenu-a1">+7(495)666-50-50</a>
+        <div class="social-contact"></div>
+    </div>
+</footer>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+<!-- Initialize Swiper -->
+<script>
+    var swiper = new Swiper(".mySwiper", {
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
+        effect: 'fade',
+        fadeEffect: {
+            crossFade: true
+        },
+    });
+</script>
 </body>
 </html>

@@ -24,4 +24,8 @@ public class Controller {
     public String kontakty() {
         return "kontakty";
     }
+    @GetMapping("/")
+    public String home2() {
+        return "home";
+    }
 }

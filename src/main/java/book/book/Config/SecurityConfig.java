@@ -98,7 +98,4 @@ public class SecurityConfig {
                 new HttpSessionSecurityContextRepository()
         );
     }
-
-
-
 }

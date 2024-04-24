@@ -2,8 +2,9 @@
 <html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
   <meta charset="UTF-8">
-  <title>Акции</title>
+  <title>Заказы</title>
   <link rel="stylesheet" type="text/css" href="../static/Style/home.css" th:href="@{/Style/home.css}"/>
+  <link rel="stylesheet" type="text/css" href="../static/Style/orders.css" th:href="@{/Style/orders.css}"/>
 </head>
 <body>
 <header>
@@ -32,7 +33,7 @@
     </div>
     <div class="header-middle-actions">
       <div class="header-middle-actions-1">
-        <a href="/orders" class="header-middle-actions-a">
+        <a href="/cart" class="header-middle-actions-a">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="feather feather-archive"><polyline points="21 8 21 21 3 21 3 8"></polyline><rect x="1" y="3" width="22" height="5"></rect><line x1="10" y1="12" x2="14" y2="12"></line></svg>
           <p class="header-middle-actions-p">Мои заказы</p>
         </a>
@@ -92,7 +93,15 @@
   </div>
 </header>
 <div class="inner">
-
+    <p class="navigation">Главная / Заказы</p>
+    <h1 class="maintext-h1">Заказы</h1>
+    <div class="orders-div" th:each="order: ${list_orders}">
+      <p th:text="${order.book.autor}"></p>
+      <a th:text="${order.book.name}" th:href="@{/book/{id}(id=${order.book.id})}"></a>
+      <p th:text="${order.countBuyBook}"></p>
+      <p th:text="${order.book.price}"></p>
+      <p th:text="${order.orderIdCart}"></p>
+    </div>
 </div>
 <footer>
   <div class="fmenu">

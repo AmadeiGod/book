@@ -29,7 +29,9 @@ public class ControllerCart {
 
     @GetMapping("/cart")
     public String Cart(Model model,Authentication authentication){
+
         User user = userService.findUserByUsername(authentication.getName());
+
         List<Cart> arrayListCart = cartRepository.findAllByUsernameId(user.getId());
         List<Book> arrayListBook = new ArrayList<>();
         for (Cart cart : arrayListCart) {
